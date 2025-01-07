@@ -1,10 +1,11 @@
 import { PiStudentDuotone } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     const Menus = [
-        { title: "Books", src: "Books" },
-        { title: "Add book", src: "add-bool" },
-        { title: "Dashboard", src: "Dashboard" },
+        { title: "Books", src: "" },
+        { title: "Add book", src: "add-books" },
+        { title: "Dashboard", src: "dashboard" },
     ];
     return (
         <div className="flex">
@@ -24,16 +25,18 @@ const Sidebar = () => {
                 <ul className=" pt-6">
                     {
                         Menus.map((Menu, index) => (
-                            <li
-                                key={index}
-                                className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4
+                            <Link to={`/${Menu.src}`}>
+                                <li
+                                    key={index}
+                                    className={`flex rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4
  ${Menu.gap ? " mt-9" : " mt-2"} ${index === 0 && "bg-white text-black"
-                                    } `}
-                            >
-                                <span className={``}>
-                                    {Menu.title}
-                                </span>
-                            </li>
+                                        } `}
+                                >
+                                    <span className={``}>
+                                        {Menu.title}
+                                    </span>
+                                </li>
+                            </Link>
                         ))}
                 </ul>
             </div>
