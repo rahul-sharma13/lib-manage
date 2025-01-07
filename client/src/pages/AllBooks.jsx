@@ -16,14 +16,13 @@ const AllBooks = () => {
         setAnimal(value);
     };
     return (
-        <div className="w-full h-[780px] max-w-[1100px] mx-auto mt-1 overflow-hidden rounded-lg shadow-lg font-poppins">
+        <div className="w-full h-[770px] max-w-[1100px] mx-auto mt-2 overflow-hidden rounded-lg shadow-lg font-poppins">
             {/* Header or any other content above the scrollable table */}
             <div className='flex flex-col mb-4 gap-2'>
-                <h2 className="text-xl font-bold text-gray-800">All Books</h2>
+                <h2 className="text-2xl font-bold text-gray-800">All Books</h2>
                 <div className='flex flex-row gap-7'>
                     <input placeholder='Search' className='w-[80%] border-[1px] border-gray-300 hover:border-gray-400 focus:border-blue-400 p-2 px-4 focus:outline-none bg-white focus:ring focus:ring-blue-500/20 rounded text-gray-500 text-sm h-full shadow-sm' />
                     <div className='w-[20%] h-full'>
-                        <h3></h3>
                         <Select
                             value={animal}
                             onChange={handleChange}
@@ -31,7 +30,6 @@ const AllBooks = () => {
                             classNames="max-w-[200px]"
                             placeholder='timing'
                         />
-
                     </div>
                 </div>
             </div>
