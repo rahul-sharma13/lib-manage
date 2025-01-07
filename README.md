@@ -1,28 +1,27 @@
 ## Backend
-
 The API is written in node js and express js with mongodb as database
-
-## Sample env
-Please add this to the api folder in .env file
-
-```bash
-MONGO_URI=mongodb+srv://rahulharit13:gkrOdJPZLr6tav3x@cluster0.pvtkg.mongodb.net/
-PORT=3000
-JWT_SECRET=caskbaskbf
-```
+Find the frontend instructions after backend section is done(or provided separately in each folder)
 
 ## Getting started
-
 Install with npm - commands required to start
 
 ```bash
-repository clone - git clone https://github.com/rahul-sharma13/nextBlog.git
+repository clone - git clone https://github.com/rahul-sharma13/lib-manage.git
 ```
 
 ```bash
   cd api
   npm install
   npm run dev
+```
+
+## Sample env
+Please add this to the api folder in .env file
+
+```bash
+MONGO_URI=
+PORT=3000
+JWT_SECRET=caskbaskbf
 ```
 
 ## Authentication and authorization flow
@@ -35,4 +34,45 @@ ideally we should be using two refresh token(long lived) and access token(Short 
 Bcrypt - for encryption of password
 JWT - for authenication and user authorisation
 Mongoose - for connected mongodb with node
+```
+
+## FRONTEND
+Built using reactjs
+
+## Getting started
+
+Install with npm - commands required to start
+
+```bash
+repository clone - git clone https://github.com/rahul-sharma13/lib-manage.git
+```
+
+```bash
+  cd client
+  npm install
+  npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
+## Project Structure
+
+```bash
+src directory - consists of all the pages, components, hooks and root page of the project
+
+component - consists of all the component used, while ui inside the component directory is used for common components
+
+redux - for setting up redux store and slice
+
+hooks - to create custom hooks
+```
+
+## Tech Used
+
+```bash
+Axios - provides more default settings than fetch(better option would be to using it with react-query for client side caching and easy management of states)
+
+tailwind - shadcn is highly customisable library, makes it easy to Used
+
+redux - to manage global states
 ```
