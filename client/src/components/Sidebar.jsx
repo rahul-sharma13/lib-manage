@@ -1,7 +1,16 @@
 import { PiStudentDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signOutSuccess } from "../redux/slices/userSlice";
 
 const Sidebar = () => {
+    const dispatch = useDispatch();
+    const currentUser = useSelector((state) => state.auth.currentUser);
+
+    const handleLogout = () => {
+        dispatch(signOutSuccess());
+    };
+
     const Menus = [
         { title: "Books", src: "" },
         { title: "Add book", src: "add-books" },
@@ -35,24 +44,38 @@ const Sidebar = () => {
                     </ul>
                 </div>
 
-                {/* Login and Signup Buttons */}
-                <div className="bg-white rounded-lg p-5 shadow-lg">
-                    <h2 className="text-gray-800 font-bold mb-4 text-center text-lg">
-                        Get Started
-                    </h2>
-                    <div className="flex flex-col gap-3">
-                        <Link to="/login">
-                            <button className="w-full py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-200">
-                                Login
-                            </button>
-                        </Link>
-                        <Link to="/signup">
-                            <button className="w-full py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition duration-200">
-                                Signup
-                            </button>
-                        </Link>
+                {/* User Info or Login/Signup */}
+                {currentUser ? (
+                    <div className="bg-white rounded-lg p-5 shadow-lg text-center">
+                        <h2 className="text-gray-800 font-bold mb-2 text-lg">
+                            Welcome, {currentUser.name || "User"}
+                        </h2>
+                        <button
+                            onClick={handleLogout}
+                            className="w-full py-2 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition duration-200"
+                        >
+                            Logout
+                        </button>
                     </div>
-                </div>
+                ) : (
+                    <div className="bg-white rounded-lg p-5 shadow-lg">
+                        <h2 className="text-gray-800 font-bold mb-4 text-center text-lg">
+                            Get Started
+                        </h2>
+                        <div className="flex flex-col gap-3">
+                            <Link to="/login">
+                                <button className="w-full py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-200">
+                                    Login
+                                </button>
+                            </Link>
+                            <Link to="/signup">
+                                <button className="w-full py-2 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition duration-200">
+                                    Signup
+                                </button>
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

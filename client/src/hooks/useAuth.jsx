@@ -1,8 +1,12 @@
-import axios from "axios";
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
+import { signInUserSuccess } from '../redux/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export const useSignUpAuth = () => {
-    const [data, setData] = useState(null);
+    const navigate = useNavigate();
+    const { currentUser } = useSelector((state) => state.auth);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -11,8 +15,12 @@ export const useSignUpAuth = () => {
         setError(null);
 
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/auth/signup", signupData);
-            setData(response.data);
+            const response = await axios.post(
+                "http://localhost:3000/api/v1/auth/signup",
+                signupData
+            );
+            console.log(response);
+            navigate("/login");
         } catch (err) {
             setError(err.response ? err.response.data : "An error occurred");
         } finally {
@@ -20,27 +28,37 @@ export const useSignUpAuth = () => {
         }
     };
 
-    return { data, loading, error, fetchData };
+    return { currentUser, loading, error, fetchData };
 };
 
 export const useLoginAuth = () => {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.auth);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    const fetchData = async (loginData) => {
-        setLoading(true);
-        setError(null);
+  const fetchData = async (loginData) => {
+    setLoading(true);
+    setError(null);
 
-        try {
-            const response = await axios.post("http://localhost:3000/api/v1/auth/login", loginData, { withCredentials: true });
-            setData(response.data);
-        } catch (err) {
-            setError(err.response ? err.response.data : "An error occurred");
-        } finally {
-            setLoading(false);
-        }
-    };
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/v1/auth/login",
+        loginData,
+        { withCredentials: true }
+      );
+      console.log("Login response:", response.data); // Log the API response
+      dispatch(signInUserSuccess(response.data)); // Adjust if payload structure changes
+      console.log("State after login:", currentUser); // Log Redux state
+      navigate("/");
+    } catch (err) {
+      console.error("Error during login:", err);
+      setError(err.response ? err.response.data : "An error occurred");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    return { data, loading, error, fetchData };
+  return { currentUser, loading, error, fetchData };
 };
