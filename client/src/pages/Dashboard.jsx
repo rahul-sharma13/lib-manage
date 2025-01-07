@@ -1,71 +1,89 @@
-import React from 'react'
+import React from 'react';
 
 const Dashboard = () => {
     return (
-        <div className='flex flex-col mt-1 gap-2 h-[770px] w-full overflow-hidden'>
-            <div className='flex flex-row items-start gap-5'>
-                <div className='h-48 w-48 flex flex-col items-center justify-center rounded-lg bg-gray-100 shadow-lg border'>
-                    <span className='text-3xl'>34</span>
-                    <span className='text-gray-400 font-normal text-xl'>Total books</span>
+        <div className="flex w-full">
+            {/* Main Content */}
+            <div className="flex-1 flex flex-col p-6">
+                {/* Cards Section */}
+                <div className="flex flex-wrap gap-6">
+                    {[
+                        { title: 'Total Books', value: 34, color: 'bg-blue-500' },
+                        { title: 'Borrowed by You', value: 10, color: 'bg-green-500' },
+                    ].map((card, index) => (
+                        <div
+                            key={index}
+                            className={`flex flex-col items-center justify-center h-48 w-48 rounded-lg ${card.color} shadow-lg text-white`}
+                        >
+                            <span className="text-4xl font-bold">{card.value}</span>
+                            <span className="text-xl font-medium">{card.title}</span>
+                        </div>
+                    ))}
                 </div>
-                <div className='h-48 w-48 flex flex-col items-center justify-center rounded-lg bg-gray-100 shadow-lg border'>
-                    <span className='text-3xl'>34</span>
-                    <span className='text-gray-400 font-normal text-xl'>borrowed by you</span>
-                </div>
-            </div>
-            <div className='max-w-[90%]'>
-                <h1 className='text-xl font-bold text-gray-800 mb-4'>Borrowings</h1>
-                <div className="h-full overflow-y-auto rounded-lg">
-                    <table className="min-w-full bg-white rounded-lg border-collapse border border-gray-200">
-                        <thead>
-                            <tr className="bg-gray-100 text-gray-700 text-sm font-bold uppercase tracking-wider">
-                                <th className="px-4 py-3">Name</th>
-                                <th className="px-4 py-3">Author</th>
-                                <th className="px-4 py-3">Publish Year</th>
-                                <th className="px-4 py-3">Return</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array(5).fill(1).map((_, index) => (
-                                <tr
-                                    className="text-gray-800 hover:bg-gray-100 text-sm"
-                                    key={index}
-                                >
-                                    <td className="px-4 py-3 border">
-                                        <div className="flex items-center">
-                                            <div className="w-8 h-8 mr-3 rounded-full bg-gray-200"></div>
-                                            <div>
-                                                <p className="font-medium">
-                                                    Book {index}{' '}
-                                                    <span className="font-light text-gray-400">
-                                                        Subtitle {index}
-                                                    </span>
-                                                </p>
-                                                <p className="text-xs text-gray-600">
-                                                    Detail {index}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td className="px-4 py-3 border text-center">
-                                        Author {index}
-                                    </td>
-                                    <td className="px-4 py-3 border text-center">
-                                        {2000 + index}
-                                    </td>
-                                    <td className="px-4 py-3 border text-center">
-                                        <button className="px-2 py-1 bg-green-100 text-green-600 rounded cursor-pointer">
-                                            Return
-                                        </button>
-                                    </td>
+
+                {/* Table Section */}
+                <div className="mt-8">
+                    <h1 className="text-2xl font-semibold text-gray-800 mb-4">
+                        Borrowings
+                    </h1>
+                    <div className="overflow-x-auto rounded-lg shadow-md">
+                        <table className="min-w-full bg-white rounded-lg border-collapse">
+                            <thead>
+                                <tr className="bg-gray-100 text-gray-700 uppercase text-sm font-medium tracking-wide">
+                                    <th className="px-4 py-3 text-left">Name</th>
+                                    <th className="px-4 py-3 text-left">Author</th>
+                                    <th className="px-4 py-3 text-center">Publish Year</th>
+                                    <th className="px-4 py-3 text-center">Return</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {Array(5)
+                                    .fill(1)
+                                    .map((_, index) => (
+                                        <tr
+                                            key={index}
+                                            className={`${
+                                                index % 2 === 0
+                                                    ? 'bg-gray-50'
+                                                    : 'bg-gray-100'
+                                            } text-gray-800 hover:bg-gray-200 transition duration-200`}
+                                        >
+                                            <td className="px-4 py-3 border">
+                                                <div className="flex items-center">
+                                                    <div className="w-8 h-8 mr-3 rounded-full bg-blue-100"></div>
+                                                    <div>
+                                                        <p className="font-semibold">
+                                                            Book {index}{' '}
+                                                            <span className="text-gray-500 font-light">
+                                                                Subtitle {index}
+                                                            </span>
+                                                        </p>
+                                                        <p className="text-xs text-gray-500">
+                                                            Detail {index}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-3 border text-left">
+                                                Author {index}
+                                            </td>
+                                            <td className="px-4 py-3 border text-center">
+                                                {2000 + index}
+                                            </td>
+                                            <td className="px-4 py-3 border text-center">
+                                                <button className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-200">
+                                                    Return
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Dashboard
+export default Dashboard;

@@ -2,15 +2,14 @@ import Users from "../models/users.js";
 import bcrypt from "bcryptjs";
 import createToken from "../middlewares/createToken.js";
 
-
 const signUp = async (req, res) => {
-  const {name, phone, password } = req.body;
+  const { name, phone, password } = req.body;
 
   if (!name || !phone || !password) {
     throw new Error("Please fill all required fields");
   }
 
-  const userExists = await Users.findOne({ name,phone });
+  const userExists = await Users.findOne({ name, phone });
   if (userExists) return res.status(401).send("User already exists");
 
   // Hash Password
@@ -35,8 +34,8 @@ const signUp = async (req, res) => {
 };
 
 const logIn = async (req, res) => {
-  const { name,phone, password } = req.body;
-  const existingUser = await Users.findOne({ name,phone });
+  const { name, phone, password } = req.body;
+  const existingUser = await Users.findOne({ name, phone });
 
   if (existingUser) {
     const isPasswordValid = await bcrypt.compare(
@@ -47,10 +46,10 @@ const logIn = async (req, res) => {
     if (isPasswordValid) {
       createToken(res, existingUser._id);
       return res.status(201).json({
-          _id: existingUser._id,
-          name: existingUser.name,
-          phone: existingUser.phone,
-          isAdmin: existingUser.isAdmin,
+        _id: existingUser._id,
+        name: existingUser.name,
+        phone: existingUser.phone,
+        isAdmin: existingUser.isAdmin,
       });
     } else {
       return res.status(401).json({ message: "Invalid Password" });
@@ -60,8 +59,8 @@ const logIn = async (req, res) => {
   }
 };
 
-const logOut= async (req, res) => {
-    res.clearCookie("jwt")
+const logOut = async (req, res) => {
+  res.clearCookie("jwt");
 
   return res.status(200).json({ message: "Logged Out Successfully" });
 };
@@ -71,11 +70,4 @@ const allUsers = async (req, res) => {
   res.json(users);
 };
 
-
-
-export {
-  signUp,
-  logIn,
-  logOut,
-  allUsers,
-};
+export { signUp, logIn, logOut, allUsers };

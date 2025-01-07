@@ -1,22 +1,19 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
+import express from "express";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
 import cors from "cors";
 
-
-
 //flies
-import connectDB from './config/db.js';
-import authRoutes from  './routes/authRoutes.js'
-import bookRoutes from './routes/bookRoutes.js'
-import transactionRoutes from './routes/transactionRoutes.js';
+import connectDB from "./config/db.js";
+import authRoutes from "./routes/authRoutes.js";
+import bookRoutes from "./routes/bookRoutes.js";
+import transactionRoutes from "./routes/transactionRoutes.js";
 
 //configuration
 dotenv.config();
 connectDB();
 
-
-const app=express();
+const app = express();
 
 app.get("/", (req, res) => {
   res.send("server is running fine");
@@ -24,20 +21,23 @@ app.get("/", (req, res) => {
 
 //middleware
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
-app.use(express.urlencoded({ extended:true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-const port=process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 //console.log(process.env.PORT);
 
 //routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/books", bookRoutes);
+app.use("/api/v1/transaction", transactionRoutes);
 
-app.use("/api/vv/auth",authRoutes);
-app.use("/api/vv/books",bookRoutes);
-app.use("/api/vv/transaction",transactionRoutes);
-
-
-app.listen(port,()=>console.log(`server listening on port ${port}`));
+app.listen(port, () => console.log(`server listening on port ${port}`));
