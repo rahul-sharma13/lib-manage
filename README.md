@@ -14,9 +14,9 @@ repository clone - git clone https://github.com/rahul-sharma13/lib-manage.git
 ```
 
 ```bash
-  cd api
+  cd server
   npm install
-  npm run dev
+  npm run server
 ```
 
 ## Sample env
