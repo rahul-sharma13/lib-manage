@@ -1,15 +1,33 @@
 import Books from "../models/books.js"
 
-const addBook=async(req,res)=>{
+const addBook = async (req, res) => {
     try {
-        const newBook = new Books(req.body);
-        const savedBook= await newBook.save();
-        res.json(savedBook);
-        
+        const { title, author, year, status } = req.body;
+
+        // Validate required fields
+        if (!title || !author || !year) {
+            return res.status(400).json({ error: "Title, author, and year are required." });
+        }
+
+        // Create a new book based on the model
+        const newBook = new Books({
+            title,
+            author,
+            year,
+            status, // Optional as it defaults to "Available"
+        });
+
+        // Save the book to the database
+        const savedBook = await newBook.save();
+        res.status(201).json(savedBook);
     } catch (error) {
-        req.status(500).json({error: error.message});
+        if (error.code === 11000) {
+            // Handle unique constraint error for title
+            return res.status(400).json({ error: "A book with this title already exists." });
+        }
+        res.status(500).json({ error: error.message });
     }
-}
+};
 
 const updateBook = async(req,res) =>{
     try {
@@ -30,7 +48,7 @@ const updateBook = async(req,res) =>{
 
 const deleteBook=async(req,res)=>{
     try {
-        
+
         const {bookId}=req.params;
         const deleteBook=await Books.findByIdAndDelete(bookId);
 
@@ -49,7 +67,7 @@ const allBooks=async(req,res)=>{
     try {
         const allBooks = await Books.find({});
         res.json(allBooks);
-        
+
     } catch (error) {
         res.status(500).json({error:error.message})
     }
@@ -63,7 +81,7 @@ const specificBook=async(req,res)=>{
             return res.status(404).json({message:`Book not found`});
         }
         res.json(specificBook);
-        
+
     } catch (error) {
         res.status(500).json({error:error.message})
     }

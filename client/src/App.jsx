@@ -8,7 +8,7 @@ import Login from './pages/auth/Login'
 import Signup from './pages/auth/Signup'
 import { Provider } from 'react-redux'
 import store from './redux/store'
-
+import ProtectedRoute from './components/ProtectedRoute'
 
 const App = () => {
     return (
@@ -18,7 +18,9 @@ const App = () => {
                 <Routes>
                     <Route path='/' element={<AllBooks />} />
                     <Route path='/add-books' element={<AddBook />} />
-                    <Route path='/dashboard' element={<Dashboard />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path='/dashboard' element={<Dashboard />} />
+                    </Route>
                     <Route path='/login' element={<Login />} />
                     <Route path='/signup' element={<Signup />} />
                 </Routes>

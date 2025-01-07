@@ -1,20 +1,30 @@
 import { PiStudentDuotone } from "react-icons/pi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { signOutSuccess } from "../redux/slices/userSlice";
+import { useEffect, useState } from "react";
+import { IoBookSharp, IoAddOutline } from "react-icons/io5";
+import { MdOutlineDashboard } from "react-icons/md";
 
 const Sidebar = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector((state) => state.auth.currentUser);
+    const [page, setPage] = useState("/");
+
+    const location = useLocation();
+    useEffect(() => {
+        setPage(location.pathname.split("/")[1]);
+    }, [location]);
+
 
     const handleLogout = () => {
         dispatch(signOutSuccess());
     };
 
     const Menus = [
-        { title: "Books", src: "" },
-        { title: "Add book", src: "add-books" },
-        { title: "Dashboard", src: "dashboard" },
+        { title: "Books", src: "", icon: IoBookSharp },
+        ...(currentUser?.isAdmin ? [{ title: "Add book", src: "add-books", icon: IoAddOutline }] : []),
+        { title: "Dashboard", src: "dashboard", icon: MdOutlineDashboard },
     ];
 
     return (
@@ -34,9 +44,9 @@ const Sidebar = () => {
                         {Menus.map((Menu, index) => (
                             <Link to={`/${Menu.src}`} key={index}>
                                 <li
-                                    className={`flex items-center rounded-md px-4 py-2 cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 ${index === 0 && "bg-gray-700 text-white"
-                                        }`}
+                                    className={`flex items-center rounded-md px-4 py-2 cursor-pointer text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-200 ${page === Menu.src && "bg-gray-700 text-white"}`}
                                 >
+                                    <Menu.icon className="mr-2" size={20} />
                                     <span>{Menu.title}</span>
                                 </li>
                             </Link>
