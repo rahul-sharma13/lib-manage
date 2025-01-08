@@ -2,6 +2,9 @@
 you can find the add book functionality after 1:00 min mark and a book can be borrowed from all books page, while it can be returned through dashboard page of a user. Dashboard and add books are protected routes.
 https://drive.google.com/file/d/1BzN1zLnZxG9ML0Bnm8LqTTyhFmg5vc_J/view?usp=sharing
 
+## Deployed link(vercel) 
+https://lib-manage-e6h4jeyji-rahuls-projects-8d0afc8f.vercel.app/
+
 ## Backend
 The API is written in node js and express js with mongodb as database
 Find the frontend instructions after backend section is done(or provided separately in each folder)
