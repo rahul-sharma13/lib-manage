@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 
 app.use(
   cors({
-    origin: "https://lib-manage-three.vercel.app/",
+    origin: "https://lib-manage-three.vercel.app",
     credentials: true,
   })
 );
