@@ -25,7 +25,7 @@ const AllBooks = () => {
             setError(null);
 
             try {
-                const response = await axios.get("http://localhost:3000/api/v1/books/all-books");
+                const response = await axios.get("https://lib-manage-wzei.vercel.app/api/v1/books/all-books");
                 setBooks(response.data);
             } catch (err) {
                 setError(err.response ? err.response.data : "An error occurred");
@@ -68,7 +68,7 @@ const AllBooks = () => {
 
     const handleBorrow = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/transaction/new", {
+            const response = await axios.post("https://lib-manage-wzei.vercel.app/api/v1/transaction/new", {
                 bookId: selectedBookId, // Use the selectedBookId
                 userId: currentUser._id,
                 type: "borrow",
@@ -191,4 +191,3 @@ const AllBooks = () => {
 };
 
 export default AllBooks;
-

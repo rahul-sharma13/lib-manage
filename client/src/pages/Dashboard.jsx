@@ -28,7 +28,7 @@ const Dashboard = () => {
         setError(null);
         try {
             const response = await axios.get(
-                `http://localhost:3000/api/v1/transaction/${currentUser?._id}`,
+                `https://lib-manage-wzei.vercel.app/api/v1/transaction/${currentUser?._id}`,
                 { withCredentials: true }
             );
             const mappedBorrowings = mapTransactionsToBorrowings(response.data.transactions);
@@ -53,7 +53,7 @@ const Dashboard = () => {
 
         try {
             await axios.post(
-                "http://localhost:3000/api/v1/transaction/new",
+                "https://lib-manage-wzei.vercel.app/api/v1/transaction/new",
                 {
                     bookId: selectedBook._id,
                     userId: currentUser._id,

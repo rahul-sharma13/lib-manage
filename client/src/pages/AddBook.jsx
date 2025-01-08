@@ -28,7 +28,7 @@ const AddBook = () => {
 
         try {
             const response = await axios.post(
-                'http://localhost:3000/api/v1/books/add',
+                'https://lib-manage-wzei.vercel.app/api/v1/books/add',
                 {
                     title : formData.name,
                     author : formData.author,

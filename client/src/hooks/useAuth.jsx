@@ -16,7 +16,7 @@ export const useSignUpAuth = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:3000/api/v1/auth/signup",
+                `https://lib-manage-wzei.vercel.app/api/v1/auth/signup`,
                 signupData
             );
             console.log(response);
@@ -44,7 +44,7 @@ export const useLoginAuth = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/auth/login",
+        "https://lib-manage-wzei.vercel.app/api/v1/auth/login",
         loginData,
         { withCredentials: true }
       );
