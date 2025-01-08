@@ -3,7 +3,7 @@ you can find the add book functionality after 1:00 min mark and a book can be bo
 https://drive.google.com/file/d/1BzN1zLnZxG9ML0Bnm8LqTTyhFmg5vc_J/view?usp=sharing
 
 ## Deployed link(vercel) 
-https://lib-manage-e6h4jeyji-rahuls-projects-8d0afc8f.vercel.app/
+https://lib-manage-three.vercel.app/
 
 ## Backend
 The API is written in node js and express js with mongodb as database
