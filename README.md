@@ -1,3 +1,7 @@
+## Project walk through
+you can find the add book functionality after 1:00 min mark and a book can be borrowed from all books page, while it can be returned through dashboard page of a user. Dashboard and add books are protected routes.
+https://drive.google.com/file/d/1BzN1zLnZxG9ML0Bnm8LqTTyhFmg5vc_J/view?usp=sharing
+
 ## Backend
 The API is written in node js and express js with mongodb as database
 Find the frontend instructions after backend section is done(or provided separately in each folder)
@@ -10,9 +14,9 @@ repository clone - git clone https://github.com/rahul-sharma13/lib-manage.git
 ```
 
 ```bash
-  cd api
+  cd server
   npm install
-  npm run dev
+  npm run server
 ```
 
 ## Sample env
